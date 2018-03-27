@@ -6,6 +6,15 @@ Javascript library to draw and animate images on hover.
 
 <!-- [**TUTORIAL**](https://tympanus.net/codrops/2018/02/21/animated-fragment-slideshow/) -->
 
+## Example
+<p align="center">  
+    <img alt="example 1" src="gifs/balloon.gif" width="256">
+</p>
+<p align="center">  
+    <!-- <img alt="example 1" src="gifs/balloon.gif" width="256"> -->
+    <img alt="example 2" src="gifs/ny.gif" width="256">
+    <img alt="example 3" src="gifs/hover.gif" width="256">
+</p>
 
 ## Basic usage
 
