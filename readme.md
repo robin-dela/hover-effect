@@ -2,7 +2,7 @@
 
 Javascript library to draw and animate images on hover.
 
-<!-- [**DEMO**](https://tympanus.net/Tutorials/PiecesSlider/) -->
+[**DEMO**](https://robindelaporte.fr/hover/)
 
 <!-- [**TUTORIAL**](https://tympanus.net/codrops/2018/02/21/animated-fragment-slideshow/) -->
 
