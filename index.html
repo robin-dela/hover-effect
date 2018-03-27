@@ -4,32 +4,31 @@
 		<meta charset=utf-8>
 		<title>title</title>
 		<style>
-			body { margin: 0; background: black}
-			.div {width: 256px; height: 256px; position: absolute; top: 0; left: 0;}
-			.div2 {width: 256px; height: 256px; position: absolute; top: 0; left: 256px;}
-			.div3 {width: 256px; height: 256px; position: absolute; top: 256px; left: 0;}
-			.div4 {width: 256px; height: 256px; position: absolute; top: 256px; left: 256px;}
+			body { margin: 0; background: white}
+			div {
+				width: 256px; height: 256px; margin: 10px auto; position: relative;
+			}
+			.div5 {width: 384px; height: 256px;}
+			.div4 { background: black;}
 			.div4 span { position: absolute; color: rgba(255, 255, 255, 1); font-size: 14px; font-family: sans-serif; font-weight: bold; letter-spacing: 4px; top:50%; left: 50%; transform: translate(-50%, -50%); transition: color 0.6s ease;}
 			.div4:hover span{transition: color 0.6s ease; color: rgba(255, 255, 255, 0.6);}
-			.div5 {width: 384px; height: 256px; position: absolute; top: 256px; left: 512px;}
-			.div6 {width: 256px; height: 256px; position: absolute; top: 0px; left: 512px; background: white;}
+
 		</style>
 		<script src="js/three.min.js"></script>
-		<!-- <script src="js/OrbitControls.js"></script> -->
-		<!-- <script src="js/dat.gui.min.js"></script> -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 		<script src="js/hover.js"></script>
 	</head>
 	<body>
 
+		<div class='div5'></div>
+
 		<div class='div'></div>
 		<div class='div2'></div>
 		<div class='div3'></div>
-		<div class='div6'></div>
 		<div class='div4'>
 			<span>MY BUTTON</span>
 		</div>
-		<div class='div5'></div>
+		<div class='div6'></div>
 
 		<script>
 			var button = new hoverEffect({
