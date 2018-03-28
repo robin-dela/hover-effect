@@ -56,6 +56,7 @@ var hoverEffect = function(opts) {
     var intensity = opts.intensity || 1;
     var speedIn = opts.speedIn || 1.6;
     var speedOut = opts.speedOut || 1.2;
+    var userHover = (opts.hover === undefined) ? true : opts.hover;
 
 	var mobileAndTabletcheck = function() {
 	  var check = false;
@@ -130,27 +131,48 @@ var hoverEffect = function(opts) {
     var object = new THREE.Mesh(geometry, mat);
     scene.add(object);
 
-    var evtIn = "mouseenter";
-    var evtOut = "mouseleave";
-    if (mobileAndTabletcheck()) {
-        evtIn = "touchstart";
-        evtOut = "touchend";
+    var addEvents = function(){
+        var evtIn = "mouseenter";
+        var evtOut = "mouseleave";
+        if (mobileAndTabletcheck()) {
+            evtIn = "touchstart";
+            evtOut = "touchend";
+        }
+        parent.addEventListener(evtIn, function(e) {
+            e.preventDefault();
+            TweenMax.to(mat.uniforms.dispFactor, speedIn, {
+                value: 1,
+                ease: Expo.easeOut
+            });
+        });
+
+        parent.addEventListener(evtOut, function(e) {
+            e.preventDefault();
+            TweenMax.to(mat.uniforms.dispFactor, speedOut, {
+                value: 0,
+                ease: Expo.easeOut
+            });
+        });
+    };
+
+    if (userHover) {
+        addEvents();
     }
-    parent.addEventListener(evtIn, function(e) {
-        e.preventDefault();
+
+
+    this.next = function(){
         TweenMax.to(mat.uniforms.dispFactor, speedIn, {
             value: 1,
             ease: Expo.easeOut
         });
-    });
+    }
 
-    parent.addEventListener(evtOut, function(e) {
-        e.preventDefault();
+    this.previous = function(){
         TweenMax.to(mat.uniforms.dispFactor, speedOut, {
             value: 0,
             ease: Expo.easeOut
         });
-    });
+    };
 
     var animate = function() {
         requestAnimationFrame(animate);

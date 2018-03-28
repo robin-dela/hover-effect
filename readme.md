@@ -61,3 +61,11 @@ optional parameters:
 |`intensity`                      | `Integer`   | `1`             | Used to determinate the `intensity` of the effect, 0 is no effect and 1 is full distorsion. |
 |`speedIn`                      | `Integer`   | `1.6`             | Speed of the first step of the animation (in second). |
 |`speedOut`                      | `Integer`   | `1.2`             | Speed of the second step of the animation (in second). |
+|`hover`                      | `Boolean`   | `true`             | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
+
+functions:
+
+| Name                    | Description                    |
+|-------------------------|-------------------------|-----------------|-------------|
+|`next`                      | Do the transition to the next image |
+|`previous`                      | Do the transition to the previous image |
