@@ -36,7 +36,7 @@ Then you only need a `div` element in HTML to start animating things with a piec
         parent: document.querySelector('.my-div'),
         intensity: 0.3,
         image1: 'images/myImage1.jpg',
-        image2: 'images/myImage1.jpg',
+        image2: 'images/myImage2.jpg',
         displacementImage: 'images/myDistorsionImage.png'
     });
 </script>
