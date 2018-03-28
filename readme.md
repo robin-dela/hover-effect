@@ -65,7 +65,7 @@ optional parameters:
 
 functions:
 
-| Name                    | Description                    |
-|-------------------------|-------------------------|-----------------|-------------|
-|`next`                      | Do the transition to the next image |
-|`previous`                      | Do the transition to the previous image |
+| Name                    | Description             |
+|-------------------------|-------------------------|
+|`next`                   | Do the transition to the next image |
+|`previous`               | Do the transition to the previous image |
