@@ -159,6 +159,10 @@ var hoverEffect = function(opts) {
         addEvents();
     }
 
+    window.addEventListener("resize", function(e) {
+        renderer.setSize(parent.offsetWidth, parent.offsetHeight);
+    });
+
 
     this.next = function(){
         TweenMax.to(mat.uniforms.dispFactor, speedIn, {
