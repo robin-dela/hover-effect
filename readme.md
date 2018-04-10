@@ -7,13 +7,9 @@ Javascript library to draw and animate images on hover.
 [**ARTICLE**](https://tympanus.net/codrops/2018/04/10/webgl-distortion-hover-effects/)
 
 ## Example
-<p align="center">  
-    <img alt="example 1" src="gifs/balloon.gif" width="256">
-</p>
-<p align="center">  
-    <!-- <img alt="example 1" src="gifs/balloon.gif" width="256"> -->
-    <img alt="example 2" src="gifs/ny.gif" width="256">
-    <img alt="example 3" src="gifs/hover.gif" width="256">
+<p align="center">
+    <img alt="example 1" src="gifs/1.gif" width="256">
+    <img alt="example 2" src="gifs/2.gif" width="256">
 </p>
 
 ## Basic usage
