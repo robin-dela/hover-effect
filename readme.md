@@ -54,9 +54,9 @@ optional parameters:
 
 | Name                    | Type                    | Default         | Description |
 |-------------------------|-------------------------|-----------------|-------------|
-|`intensity`                      | `Integer`   | `1`             | Used to determinate the `intensity` of the effect, 0 is no effect and 1 is full distorsion. |
-|`speedIn`                      | `Integer`   | `1.6`             | Speed of the first step of the animation (in second). |
-|`speedOut`                      | `Integer`   | `1.2`             | Speed of the second step of the animation (in second). |
+|`intensity`                      | `Float`   | `1`             | Used to determinate the `intensity` of the effect, 0 is no effect and 1 is full distorsion. |
+|`speedIn`                      | `Float`   | `1.6`             | Speed of the first step of the animation (in second). |
+|`speedOut`                      | `Float`   | `1.2`             | Speed of the second step of the animation (in second). |
 |`hover`                      | `Boolean`   | `true`             | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
 
 functions:
