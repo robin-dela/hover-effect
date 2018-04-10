@@ -82,7 +82,7 @@ var hoverEffect = function(opts) {
         alpha: true
     });
 
-    renderer.setPixelRatio = 1;
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0xffffff, 0.0);
     renderer.setSize(parent.offsetWidth, parent.offsetHeight);
     parent.appendChild(renderer.domElement);
@@ -103,8 +103,8 @@ var hoverEffect = function(opts) {
     var disp = loader.load(dispImage);
     disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
 
-    // texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
-    // texture1.minFilter = texture2.minFilter = THREE.LinearMipMapLinearFilter;
+    texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+    texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
 
     texture1.anisotropy = renderer.getMaxAnisotropy();
     texture2.anisotropy = renderer.getMaxAnisotropy();
