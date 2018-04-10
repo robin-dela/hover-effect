@@ -2,9 +2,9 @@
 
 Javascript library to draw and animate images on hover.
 
-[**DEMO**](https://robindelaporte.fr/hover/)
+[**DEMO**](https://tympanus.net/Development/DistortionHoverEffect/)
 
-<!-- [**TUTORIAL**](https://tympanus.net/codrops/2018/02/21/animated-fragment-slideshow/) -->
+[**ARTICLE**](https://tympanus.net/codrops/2018/04/10/webgl-distortion-hover-effects/)
 
 ## Example
 <p align="center">  
