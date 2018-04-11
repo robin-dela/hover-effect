@@ -58,6 +58,7 @@ optional parameters:
 |`speedIn`                      | `Float`   | `1.6`             | Speed of the first step of the animation (in second). |
 |`speedOut`                      | `Float`   | `1.2`             | Speed of the second step of the animation (in second). |
 |`hover`                      | `Boolean`   | `true`             | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
+|`easing`                      | `String`   | `Expo.easeOut`             | Easing of the transition, see [greensock easing](https://greensock.com/ease-visualizer)|
 
 functions:
 
