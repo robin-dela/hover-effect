@@ -78,27 +78,23 @@ var hoverEffect = function(opts) {
     camera.position.z = 1;
 
     var renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
+        antialias: false,
+        // alpha: true
     });
 
-    renderer.setPixelRatio(window.devicePixelRatio);
+    // renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0xffffff, 0.0);
     renderer.setSize(parent.offsetWidth, parent.offsetHeight);
     parent.appendChild(renderer.domElement);
 
-    var addToGPU = function(t) {
-        renderer.setTexture2D(t, 0);
-    };
+    // var addToGPU = function(t) {
+    //     renderer.setTexture2D(t, 0);
+    // };
 
     var loader = new THREE.TextureLoader();
     loader.crossOrigin = "";
-    var texture1 = loader.load(image1, function(texture) {
-        addToGPU(texture);
-    });
-    var texture2 = loader.load(image2, function(texture) {
-        addToGPU(texture);
-    });
+    var texture1 = loader.load(image1);
+    var texture2 = loader.load(image2);
 
     var disp = loader.load(dispImage);
     disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
