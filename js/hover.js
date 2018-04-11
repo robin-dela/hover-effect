@@ -57,6 +57,7 @@ var hoverEffect = function(opts) {
     var speedIn = opts.speedIn || 1.6;
     var speedOut = opts.speedOut || 1.2;
     var userHover = (opts.hover === undefined) ? true : opts.hover;
+    var easing = opts.easing || Expo.easeOut;
 
 	var mobileAndTabletcheck = function() {
 	  var check = false;
@@ -142,7 +143,7 @@ var hoverEffect = function(opts) {
             e.preventDefault();
             TweenMax.to(mat.uniforms.dispFactor, speedIn, {
                 value: 1,
-                ease: Expo.easeOut
+                ease: easing
             });
         });
 
@@ -150,7 +151,7 @@ var hoverEffect = function(opts) {
             e.preventDefault();
             TweenMax.to(mat.uniforms.dispFactor, speedOut, {
                 value: 0,
-                ease: Expo.easeOut
+                ease: easing
             });
         });
     };
@@ -167,14 +168,14 @@ var hoverEffect = function(opts) {
     this.next = function(){
         TweenMax.to(mat.uniforms.dispFactor, speedIn, {
             value: 1,
-            ease: Expo.easeOut
+            ease: easing
         });
     }
 
     this.previous = function(){
         TweenMax.to(mat.uniforms.dispFactor, speedOut, {
             value: 0,
-            ease: Expo.easeOut
+            ease: easing
         });
     };
 
