@@ -69,12 +69,16 @@ void main() {
   renderer.setSize(parent.offsetWidth, parent.offsetHeight);
   parent.appendChild(renderer.domElement);
 
+  var render = function() {
+    // This will be called by the TextureLoader as well as TweenMax.
+    renderer.render(scene, camera);
+  };
+
   var loader = new THREE.TextureLoader();
   loader.crossOrigin = '';
-  var texture1 = loader.load(image1);
-  var texture2 = loader.load(image2);
-
-  var disp = loader.load(dispImage);
+  var texture1 = loader.load(image1, render);
+  var texture2 = loader.load(image2, render);
+  var disp = loader.load(dispImage, render);
   disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
 
   texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
@@ -106,15 +110,19 @@ void main() {
     TweenMax.to(mat.uniforms.dispFactor, speedIn, {
       value: 1,
       ease: easing,
+      onUpdate: render,
+      onComplete: render,
     });
-  };
+  }
 
   function transitionOut() {
     TweenMax.to(mat.uniforms.dispFactor, speedOut, {
       value: 0,
       ease: easing,
+      onUpdate: render,
+      onComplete: render,
     });
-  };
+  }
 
   if (userHover) {
     parent.addEventListener('mouseenter', transitionIn);
@@ -129,11 +137,4 @@ void main() {
 
   this.next = transitionIn;
   this.previous = transitionOut;
-
-  var animate = function() {
-    requestAnimationFrame(animate);
-
-    renderer.render(scene, camera);
-  };
-  animate();
 };
