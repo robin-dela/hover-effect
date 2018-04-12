@@ -41,28 +41,33 @@ Then you only need a `div` element in HTML to start animating things with a piec
 
 ## Options
 
-mandatory parameters :
+### Mandatory parameters
 
-| Name                    | Type                    | Default         | Description |
-|-------------------------|-------------------------|-----------------|-------------|
-|`parent`                 | `Dom element`   | `null`          | A dom element where the animation will be injected. The images of the animation will take the parent's size. |
-|`image1`                  | `Image`      | `null`            | first `Image` of the animation. |
-|`image2`                  | `Image`      | `null`            | second `Image` of the animation. |
-|`displacementImage`                  | `Image`      | `null`            | `Image` used to do the transition between the 2 main images. |
+| Name                    | Type            | Default         | Description |
+|-------------------------|-----------------|-----------------|-------------|
+|`parent`                 | `Dom element`   | `null`          | The DOM element where the animation will be injected. The images of the animation will take the parent's size. |
+|`image1`                 | `Image`         | `null`          | The first `Image` of the animation. |
+|`image2`                 | `Image`         | `null`          | The second `Image` of the animation. |
+|`displacementImage`      | `Image`         | `null`          | The `Image` used to do the transition between the 2 main images. |
 
-optional parameters:
+### Optional parameters
 
-| Name                    | Type                    | Default         | Description |
-|-------------------------|-------------------------|-----------------|-------------|
-|`intensity`                      | `Float`   | `1`             | Used to determinate the `intensity` of the effect, 0 is no effect and 1 is full distorsion. |
-|`speedIn`                      | `Float`   | `1.6`             | Speed of the first step of the animation (in second). |
-|`speedOut`                      | `Float`   | `1.2`             | Speed of the second step of the animation (in second). |
-|`hover`                      | `Boolean`   | `true`             | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
-|`easing`                      | `String`   | `Expo.easeOut`             | Easing of the transition, see [greensock easing](https://greensock.com/ease-visualizer)|
+| Name                    | Type      | Default         | Description |
+|-------------------------|-----------|-----------------|-------------|
+|`intensity`              | `Float`   | `1`             | Used to determine the intensity of the distortion effect. 0 is no effect and 1 is full distortion. |
+|`intensity1`             | `Float`   | `intensity`     | Overrides the distortion intensity of the first image. |
+|`intensity2`             | `Float`   | `intensity`     | Overrides the distortion intensity of the second image. |
+|`angle`                  | `Float`   | `Math.PI / 4`   | Angle of the distortion effect in Radians. Defaults to Pi / 4 (45 degrees). |
+|`angle1`                 | `Float`   | `angle`         | Overrides the distortion angle for the first image. |
+|`angle2`                 | `Float`   | `angle`         | Overrides the distortion angle for the second image. |
+|`speedIn`                | `Float`   | `1.6`           | Speed of the inbound animation (in seconds). |
+|`speedOut`               | `Float`   | `1.2`           | Speed of the outbound animation (in seconds). |
+|`hover`                  | `Boolean` | `true`          | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
+|`easing`                 | `String`  | `Expo.easeOut`  | Easing of the transition, see [greensock easing](https://greensock.com/ease-visualizer)|
 
-functions:
+### Methods
 
 | Name                    | Description             |
 |-------------------------|-------------------------|
-|`next`                   | Do the transition to the next image |
-|`previous`               | Do the transition to the previous image |
+|`next`                   | Transition to the second image. |
+|`previous`               | Transition to the first image. |
