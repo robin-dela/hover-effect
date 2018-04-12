@@ -59,7 +59,7 @@ Then you only need a `div` element in HTML to start animating things with a piec
 |`intensity2`             | `Float`   | `intensity`     | Overrides the distortion intensity of the second image. |
 |`angle`                  | `Float`   | `Math.PI / 4`   | Angle of the distortion effect in Radians. Defaults to Pi / 4 (45 degrees). |
 |`angle1`                 | `Float`   | `angle`         | Overrides the distortion angle for the first image. |
-|`angle2`                 | `Float`   | `angle`         | Overrides the distortion angle for the second image. |
+|`angle2`                 | `Float`   | `-angle * 3`    | Overrides the distortion angle for the second image. |
 |`speedIn`                | `Float`   | `1.6`           | Speed of the inbound animation (in seconds). |
 |`speedOut`               | `Float`   | `1.2`           | Speed of the outbound animation (in seconds). |
 |`hover`                  | `Boolean` | `true`          | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
@@ -71,3 +71,8 @@ Then you only need a `div` element in HTML to start animating things with a piec
 |-------------------------|-------------------------|
 |`next`                   | Transition to the second image. |
 |`previous`               | Transition to the first image. |
+
+### Credits
+Thanks to :
+- [Codrops](https://twitter.com/crnacura) for the creation of the example
+- [Aarni Koskela](https://github.com/akx/) for the improvements

@@ -52,7 +52,7 @@ void main() {
   var intensity2 = firstDefined(opts.intensity2, opts.intensity, 1);
   var commonAngle = firstDefined(opts.angle, Math.PI / 4); // 45 degrees by default, so grayscale images work correctly
   var angle1 = firstDefined(opts.angle1, commonAngle);
-  var angle2 = firstDefined(opts.angle2, commonAngle);
+  var angle2 = firstDefined(opts.angle2, -commonAngle*3);
   var speedIn = firstDefined(opts.speedIn, opts.speed, 1.6);
   var speedOut = firstDefined(opts.speedOut, opts.speed, 1.2);
   var userHover = firstDefined(opts.hover, true);

@@ -58,7 +58,7 @@
 	</style>
 	<script src="js/three.min.js"></script>
 	<script src="js/TweenMax.min.js"></script>
-	<script src="js/hover.js"></script>
+	<script src="js/hover.min.js"></script>
 </head>
 
 <body>
@@ -88,7 +88,7 @@
 			image2: 'images/ny-info.jpg',
 			displacementImage: 'images/stripe1mul.png'
 		});
-		
+
 		var button2 = new hoverEffect({
 			parent: document.querySelector('.div2'),
 			intensity1: 0.25,
@@ -99,7 +99,7 @@
 			image2: 'images/ice2.jpg',
 			displacementImage: 'images/ramen.jpg'
 		});
-		
+
 		var button3 = new hoverEffect({
 			parent: document.querySelector('.div3'),
 			intensity: 0.3,
@@ -109,7 +109,7 @@
 			speedIn: 1.0,
 			speedOut: 1.0
 		});
-		
+
 		var button4 = new hoverEffect({
 			parent: document.querySelector('.div4'),
 			intensity: 0.1,
@@ -117,7 +117,7 @@
 			image2: 'images/rect.png',
 			displacementImage: 'images/strip.png'
 		});
-		
+
 		var button5 = new hoverEffect({
 			parent: document.querySelector('.div5'),
 			intensity: 0.2,
@@ -127,7 +127,7 @@
 			hover: false
 		});
 		document.querySelector('.next').addEventListener('click', button5.next);
-		document.querySelector('.previous').addEventListener('click', button5.previous); 
+		document.querySelector('.previous').addEventListener('click', button5.previous);
 
 		var button6 = new hoverEffect({
 			parent: document.querySelector('.div6'),
