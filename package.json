@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "prettier": "^1.12.0"
+  },
+  "scripts": {
+    "prettify": "prettier --trailing-comma=es5 --single-quote --print-width=120 --write ./js/hover.js"
+  }
+}
