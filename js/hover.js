@@ -1,4 +1,5 @@
 var hoverEffect = function(opts) {
+  var THREE = window.THREE;
   var vertex = `
 varying vec2 vUv;
 void main() {

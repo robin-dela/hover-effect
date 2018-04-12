@@ -1,8 +1,10 @@
 {
   "devDependencies": {
-    "prettier": "^1.12.0"
+    "prettier": "^1.12.0",
+    "uglify-es": "^3.3.9"
   },
   "scripts": {
+    "minify": "uglifyjs --mangle --compress -- js/hover.js > js/hover.min.js",
     "prettify": "prettier --trailing-comma=es5 --single-quote --print-width=120 --write ./js/hover.js"
   }
 }
