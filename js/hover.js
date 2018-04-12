@@ -37,18 +37,35 @@ void main() {
 }
 `;
 
-  var parent = opts.parent || console.warn('no parent');
-  var dispImage = opts.displacementImage || console.warn('displacement image missing');
-  var image1 = opts.image1 || console.warn('first image missing');
-  var image2 = opts.image2 || console.warn('second image missing');
-  var intensity1 = opts.intensity1 || opts.intensity || 1;
-  var intensity2 = opts.intensity2 || opts.intensity || 1;
-  var angle1 = opts.angle1 || opts.angle || 0;
-  var angle2 = opts.angle2 || opts.angle || 0;
-  var speedIn = opts.speedIn || opts.speed || 1.6;
-  var speedOut = opts.speedOut || opts.speed || 1.2;
-  var userHover = opts.hover === undefined ? true : opts.hover;
-  var easing = opts.easing || Expo.easeOut;
+  function firstDefined() {
+    for (var i = 0; i < arguments.length; i++) {
+      if (arguments[i] !== undefined) return arguments[i];
+    }
+  }
+
+  var parent = opts.parent;
+  var dispImage = opts.displacementImage;
+  var image1 = opts.image1;
+  var image2 = opts.image2;
+  var intensity1 = firstDefined(opts.intensity1, opts.intensity, 1);
+  var intensity2 = firstDefined(opts.intensity2, opts.intensity, 1);
+  var commonAngle = firstDefined(opts.angle, Math.PI / 4); // 45 degrees by default, so grayscale images work correctly
+  var angle1 = firstDefined(opts.angle1, commonAngle);
+  var angle2 = firstDefined(opts.angle2, commonAngle);
+  var speedIn = firstDefined(opts.speedIn, opts.speed, 1.6);
+  var speedOut = firstDefined(opts.speedOut, opts.speed, 1.2);
+  var userHover = firstDefined(opts.hover, true);
+  var easing = firstDefined(opts.easing, Expo.easeOut);
+
+  if (!parent) {
+    console.warn('Parent missing');
+    return;
+  }
+
+  if (!(image1 && image2 && dispImage)) {
+    console.warn('One or more images are missing');
+    return;
+  }
 
   var scene = new THREE.Scene();
   var camera = new THREE.OrthographicCamera(
