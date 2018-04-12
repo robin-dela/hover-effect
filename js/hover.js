@@ -1,61 +1,52 @@
 var hoverEffect = function(opts) {
   var vertex = `
-		varying vec2 vUv;
-		void main() {
-		  vUv = uv;
-		  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-		}
-	`;
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+}
+`;
 
   var fragment = `
-		varying vec2 vUv;
+varying vec2 vUv;
 
-		uniform sampler2D texture;
-		uniform sampler2D texture2;
-		uniform sampler2D disp;
+uniform float dispFactor;
+uniform sampler2D disp;
 
-		// uniform float time;
-		// uniform float _rot;
-		uniform float dispFactor;
-		uniform float effectFactor;
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+uniform float angle1;
+uniform float angle2;
+uniform float intensity1;
+uniform float intensity2;
 
-		// vec2 rotate(vec2 v, float a) {
-		// 	float s = sin(a);
-		// 	float c = cos(a);
-		// 	mat2 m = mat2(c, -s, s, c);
-		// 	return m * v;
-		// }
+mat2 getRotM(float angle) {
+  float s = sin(angle);
+  float c = cos(angle);
+  return mat2(c, -s, s, c);
+}
 
-		void main() {
-
-			vec2 uv = vUv;
-
-			// uv -= 0.5;
-			// vec2 rotUV = rotate(uv, _rot);
-			// uv += 0.5;
-
-			vec4 disp = texture2D(disp, uv);
-
-			vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);
-			vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);
-
-			vec4 _texture = texture2D(texture, distortedPosition);
-			vec4 _texture2 = texture2D(texture2, distortedPosition2);
-
-			vec4 finalTexture = mix(_texture, _texture2, dispFactor);
-
-			gl_FragColor = finalTexture;
-			// gl_FragColor = disp;
-		}
-	`;
+void main() {
+  vec4 disp = texture2D(disp, vUv);
+  vec2 dispVec = vec2(disp.r, disp.g);
+  vec2 distortedPosition1 = vUv + getRotM(angle1) * dispVec * intensity1 * dispFactor;
+  vec2 distortedPosition2 = vUv + getRotM(angle2) * dispVec * intensity2 * (1.0 - dispFactor);
+  vec4 _texture1 = texture2D(texture1, distortedPosition1);
+  vec4 _texture2 = texture2D(texture2, distortedPosition2);
+  gl_FragColor = mix(_texture1, _texture2, dispFactor);
+}
+`;
 
   var parent = opts.parent || console.warn('no parent');
   var dispImage = opts.displacementImage || console.warn('displacement image missing');
   var image1 = opts.image1 || console.warn('first image missing');
   var image2 = opts.image2 || console.warn('second image missing');
-  var intensity = opts.intensity || 1;
-  var speedIn = opts.speedIn || 1.6;
-  var speedOut = opts.speedOut || 1.2;
+  var intensity1 = opts.intensity1 || opts.intensity || 1;
+  var intensity2 = opts.intensity2 || opts.intensity || 1;
+  var angle1 = opts.angle1 || opts.angle || 0;
+  var angle2 = opts.angle2 || opts.angle || 0;
+  var speedIn = opts.speedIn || opts.speed || 1.6;
+  var speedOut = opts.speedOut || opts.speed || 1.2;
   var userHover = opts.hover === undefined ? true : opts.hover;
   var easing = opts.easing || Expo.easeOut;
 
@@ -87,19 +78,12 @@ var hoverEffect = function(opts) {
 
   camera.position.z = 1;
 
-  var renderer = new THREE.WebGLRenderer({
-    antialias: false,
-    // alpha: true
-  });
+  var renderer = new THREE.WebGLRenderer({ antialias: false });
 
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setClearColor(0xffffff, 0.0);
   renderer.setSize(parent.offsetWidth, parent.offsetHeight);
   parent.appendChild(renderer.domElement);
-
-  // var addToGPU = function(t) {
-  //     renderer.setTexture2D(t, 0);
-  // };
 
   var loader = new THREE.TextureLoader();
   loader.crossOrigin = '';
@@ -112,14 +96,14 @@ var hoverEffect = function(opts) {
   texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
   texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
 
-  texture1.anisotropy = renderer.getMaxAnisotropy();
-  texture2.anisotropy = renderer.getMaxAnisotropy();
-
   var mat = new THREE.ShaderMaterial({
     uniforms: {
-      effectFactor: { type: 'f', value: intensity },
+      intensity1: { type: 'f', value: intensity1 },
+      intensity2: { type: 'f', value: intensity2 },
       dispFactor: { type: 'f', value: 0.0 },
-      texture: { type: 't', value: texture1 },
+      angle1: { type: 'f', value: angle1 },
+      angle2: { type: 'f', value: angle2 },
+      texture1: { type: 't', value: texture1 },
       texture2: { type: 't', value: texture2 },
       disp: { type: 't', value: disp },
     },
