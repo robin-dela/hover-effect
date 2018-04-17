@@ -79,6 +79,6 @@ Thanks to :
 
 ### Made with it
 <p align="center">
-    <img alt="Alex Brown demo" src="https://cdn-images-1.medium.com/max/1600/1*0QAyCjFQ3okk9ixl5ftCEw.gif" width="256">
+    <img alt="Alex Brown demo" src="gifs/alex_brown.gif" width="256">
 </p>
 - [Codepen demo](https://codepen.io/alxrbrown/pen/GxVQLr) and [Medium article](https://medium.com/@alxrbrown/create-a-distortion-hover-effect-using-webgl-32fc1ab50d24) by Alex Brown
