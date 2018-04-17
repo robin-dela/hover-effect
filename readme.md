@@ -72,13 +72,14 @@ Then you only need a `div` element in HTML to start animating things with a piec
 |`next`                   | Transition to the second image. |
 |`previous`               | Transition to the first image. |
 
-### Credits
+## Credits
 Thanks to :
 - [Codrops](https://twitter.com/crnacura) for the creation of the example
 - [Aarni Koskela](https://github.com/akx/) for the improvements
 
-### Made with it
+## Made with it
 <p align="center">
     <img alt="Alex Brown demo" src="gifs/alex_brown.gif" width="512">
 </p>
+
 - [Codepen demo](https://codepen.io/alxrbrown/pen/GxVQLr) and [Medium article](https://medium.com/@alxrbrown/create-a-distortion-hover-effect-using-webgl-32fc1ab50d24) by Alex Brown
