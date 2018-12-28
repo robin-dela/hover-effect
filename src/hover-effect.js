@@ -1,5 +1,7 @@
-var hoverEffect = function(opts) {
-  var THREE = window.THREE;
+import * as THREE from 'three';
+import TweenMax from 'gsap/TweenMax';
+
+export default function (opts) {
   var vertex = `
 varying vec2 vUv;
 void main() {
@@ -52,7 +54,7 @@ void main() {
   var intensity2 = firstDefined(opts.intensity2, opts.intensity, 1);
   var commonAngle = firstDefined(opts.angle, Math.PI / 4); // 45 degrees by default, so grayscale images work correctly
   var angle1 = firstDefined(opts.angle1, commonAngle);
-  var angle2 = firstDefined(opts.angle2, -commonAngle*3);
+  var angle2 = firstDefined(opts.angle2, -commonAngle * 3);
   var speedIn = firstDefined(opts.speedIn, opts.speed, 1.6);
   var speedOut = firstDefined(opts.speedOut, opts.speed, 1.2);
   var userHover = firstDefined(opts.hover, true);
@@ -80,14 +82,16 @@ void main() {
 
   camera.position.z = 1;
 
-  var renderer = new THREE.WebGLRenderer({ antialias: false });
+  var renderer = new THREE.WebGLRenderer({
+    antialias: false
+  });
 
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setClearColor(0xffffff, 0.0);
   renderer.setSize(parent.offsetWidth, parent.offsetHeight);
   parent.appendChild(renderer.domElement);
 
-  var render = function() {
+  var render = function () {
     // This will be called by the TextureLoader as well as TweenMax.
     renderer.render(scene, camera);
   };
@@ -104,14 +108,38 @@ void main() {
 
   var mat = new THREE.ShaderMaterial({
     uniforms: {
-      intensity1: { type: 'f', value: intensity1 },
-      intensity2: { type: 'f', value: intensity2 },
-      dispFactor: { type: 'f', value: 0.0 },
-      angle1: { type: 'f', value: angle1 },
-      angle2: { type: 'f', value: angle2 },
-      texture1: { type: 't', value: texture1 },
-      texture2: { type: 't', value: texture2 },
-      disp: { type: 't', value: disp },
+      intensity1: {
+        type: 'f',
+        value: intensity1
+      },
+      intensity2: {
+        type: 'f',
+        value: intensity2
+      },
+      dispFactor: {
+        type: 'f',
+        value: 0.0
+      },
+      angle1: {
+        type: 'f',
+        value: angle1
+      },
+      angle2: {
+        type: 'f',
+        value: angle2
+      },
+      texture1: {
+        type: 't',
+        value: texture1
+      },
+      texture2: {
+        type: 't',
+        value: texture2
+      },
+      disp: {
+        type: 't',
+        value: disp
+      },
     },
 
     vertexShader: vertex,
@@ -149,7 +177,7 @@ void main() {
     parent.addEventListener('touchend', transitionOut);
   }
 
-  window.addEventListener('resize', function(e) {
+  window.addEventListener('resize', function (e) {
     renderer.setSize(parent.offsetWidth, parent.offsetHeight);
   });
 
