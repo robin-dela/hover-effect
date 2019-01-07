@@ -26,7 +26,7 @@ Then you only need a `div` element in HTML to start animating things with a piec
 <script src="three.min.js"></script>
 <script src="TweenMax.min.js"></script>
 
-<script src="hover.js"></script>
+<script src="dist/hover.umd.js"></script>
 <script>
     var myAnimation = new hoverEffect({
         parent: document.querySelector('.my-div'),
@@ -38,6 +38,25 @@ Then you only need a `div` element in HTML to start animating things with a piec
 </script>
 ```
 
+## Node JS usage
+
+This helper can also be used in node js environments. Three.js and TweenMax scripts are included as dependencies in the package so you don't need to manually include them.
+
+### Install
+
+```
+npm install hover-effect
+```
+
+### Import
+
+```js
+import hoverEffect from 'hover-effect'
+```
+
+### Init
+
+Initialize just as you would in the basic usage example above.
 
 ## Options
 
