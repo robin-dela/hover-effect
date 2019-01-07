@@ -95,6 +95,7 @@ Initialize just as you would in the basic usage example above.
 Thanks to :
 - [Codrops](https://twitter.com/crnacura) for the creation of the example
 - [Aarni Koskela](https://github.com/akx/) for the improvements
+- [Celso White](https://github.com/celsowhite) for the multiple module formats
 
 ## Made with it
 <p align="center">
