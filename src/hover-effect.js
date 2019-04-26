@@ -83,7 +83,8 @@ void main() {
   camera.position.z = 1;
 
   var renderer = new THREE.WebGLRenderer({
-    antialias: false
+    antialias: false,
+    alpha: true
   });
 
   renderer.setPixelRatio(window.devicePixelRatio);
