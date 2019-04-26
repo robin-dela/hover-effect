@@ -83,6 +83,7 @@ Initialize just as you would in the basic usage example above.
 |`speedOut`               | `Float`   | `1.2`           | Speed of the outbound animation (in seconds). |
 |`hover`                  | `Boolean` | `true`          | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
 |`easing`                 | `String`  | `Expo.easeOut`  | Easing of the transition, see [greensock easing](https://greensock.com/ease-visualizer)|
+|`video`                  | `Boolean` | `false`         | Defines if you want to use videos instead of images (note: you need 2 videos, it doesn't work with one image and one video.) |
 
 ### Methods
 

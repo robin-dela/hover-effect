@@ -69,6 +69,7 @@
 	</div>
 
 	<div class="demos-ctr">
+		<div class='div-video demo'></div>
 		<div class='div demo'></div>
 		<div class='div2 demo'></div>
 		<div class='div3 demo'></div>
@@ -79,6 +80,14 @@
 	</div>
 
 	<script>
+		var button = new hoverEffect({
+			parent: document.querySelector('.div-video'),
+			image1: 'videos/video.mp4',
+			image2: 'videos/video2.mp4',
+			displacementImage: 'images/fluid.jpg',
+			video: true
+		});
+
 		var button = new hoverEffect({
 			parent: document.querySelector('.div'),
 			intensity1: 0.1,

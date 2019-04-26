@@ -59,6 +59,7 @@ void main() {
   var speedOut = firstDefined(opts.speedOut, opts.speed, 1.2);
   var userHover = firstDefined(opts.hover, true);
   var easing = firstDefined(opts.easing, Expo.easeOut);
+  var video = firstDefined(opts.video, false);
 
   if (!parent) {
     console.warn('Parent missing');
@@ -99,13 +100,63 @@ void main() {
 
   var loader = new THREE.TextureLoader();
   loader.crossOrigin = '';
-  var texture1 = loader.load(image1, render);
-  var texture2 = loader.load(image2, render);
+
   var disp = loader.load(dispImage, render);
   disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
 
-  texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
-  texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+  if (video) {
+    var animate = function() {
+        requestAnimationFrame(animate);
+
+        renderer.render(scene, camera);
+    };
+    animate();
+
+    var video = document.createElement('video');
+    video.autoplay = true;
+    video.loop = true;
+    video.src = image1;
+    video.load();
+
+    var video2 = document.createElement('video');
+    video2.autoplay = true;
+    video2.loop = true;
+    video2.src = image2;
+    video2.load();
+
+    var texture1 = new THREE.VideoTexture(video);
+    var texture2 = new THREE.VideoTexture(video2);
+    texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+    texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+
+    video2.addEventListener('loadeddata', function() {
+      video2.play();
+
+      texture2 = new THREE.VideoTexture(video2);
+      texture2.magFilter = THREE.LinearFilter;
+      texture2.minFilter = THREE.LinearFilter;
+
+      mat.uniforms.texture2.value = texture2;
+
+    }, false);
+
+    video.addEventListener('loadeddata', function() {
+      video.play();
+
+      texture1 = new THREE.VideoTexture(video);
+
+      texture1.magFilter = THREE.LinearFilter;
+      texture1.minFilter = THREE.LinearFilter;
+
+      mat.uniforms.texture1.value = texture1;
+    }, false);
+  } else {
+    var texture1 = loader.load(image1, render);
+    var texture2 = loader.load(image2, render);
+
+    texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+    texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+  }
 
   var mat = new THREE.ShaderMaterial({
     uniforms: {
