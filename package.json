@@ -1,6 +1,6 @@
 {
   "name": "hover-effect",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "source": "src/hover-effect.js",
   "module": "dist/hover-effect.es.js",
   "main": "dist/hover-effect.js",
