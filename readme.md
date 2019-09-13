@@ -2,7 +2,9 @@
 
 Javascript library to draw and animate images on hover.
 
-If this project help you, you like this library or you just want to thank me: you can give me a cup of coffee or a beer :) [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ZGDNS5D28SFWQ)
+If this project help you, you like this library or you just want to thank me, you can give me a cup of coffee or a beer 🍺
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ZGDNS5D28SFWQ)
 
 [**DEMO**](https://tympanus.net/Development/DistortionHoverEffect/)
 
@@ -13,6 +15,9 @@ If this project help you, you like this library or you just want to thank me: yo
     <img alt="example 1" src="gifs/1.gif" width="256">
     <img alt="example 2" src="gifs/2.gif" width="256">
 </p>
+
+## Use locally
+To load the images you'll need to view the demo via a web server, simply go to the demo's folder location and type `python -m SimpleHTTPServer 8000` in your terminal. Then access the demo in your browser by typing: `localhost:8000`
 
 ## Basic usage
 
@@ -86,6 +91,7 @@ Initialize just as you would in the basic usage example above.
 |`hover`                  | `Boolean` | `true`          | if set to false the animation will not be triggered on hover (see `next` and `previous` function to interact) |
 |`easing`                 | `String`  | `Expo.easeOut`  | Easing of the transition, see [greensock easing](https://greensock.com/ease-visualizer)|
 |`video`                  | `Boolean` | `false`         | Defines if you want to use videos instead of images (note: you need 2 videos, it doesn't work with one image and one video.) |
+|`imagesRatio`            | `Float`   | `1`             | Specify a value if you want a `background: cover` type of behaviour, otherwise it will apply a square aspect ratio. usage: `image height / image width` example: `1080 / 1920` |
 
 ### Methods
 
@@ -110,4 +116,9 @@ Thanks to :
 - [https://www.fabiofantolino.com/en](https://www.fabiofantolino.com/en)
 - [https://www.rodolfosarno.com/](https://www.rodolfosarno.com/)
 - [Youtube tutorial](https://www.youtube.com/watch?v=o0zlX1E7l0A)
+- [https://www.youtube.com/watch?v=9kcOQdJHyIo](https://www.youtube.com/watch?v=9kcOQdJHyIo)
 - [https://www.estudionk.com/en](https://www.estudionk.com/en)
+- [https://github.com/AlbanCrepel/vue-displacement-slideshow](https://github.com/AlbanCrepel/vue-displacement-slideshow)
+- [https://digitalpresent.io/about](https://digitalpresent.io/about)
+- [https://www.couleecreative.com/](https://www.couleecreative.com/)
+- [https://two.zero.nyc/](https://two.zero.nyc/)

@@ -11,14 +11,14 @@
 		}
 
 		.demo {
-			width: 384px;
-			height: 384px;
+			width: 40vw;
+			height: 40vh;
 			margin: 10px auto;
 			position: relative;
 		}
 
 		.div5 {
-			width: 384px;
+			width: 50vw;
 			height: 256px;
 		}
 
@@ -95,6 +95,7 @@
 			angle2: Math.PI / 2,
 			image1: 'images/ny.jpg',
 			image2: 'images/ny-info.jpg',
+			imagesRatio: 512 / 512,
 			displacementImage: 'images/stripe1mul.png'
 		});
 
@@ -130,6 +131,7 @@
 		var button5 = new hoverEffect({
 			parent: document.querySelector('.div5'),
 			intensity: 0.2,
+			imagesRatio: 512 / 768,
 			image1: 'images/balloon.jpg',
 			image2: 'images/balloon2.jpg',
 			displacementImage: 'images/dot.jpg',
