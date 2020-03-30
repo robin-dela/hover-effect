@@ -122,3 +122,6 @@ Thanks to :
 - [https://digitalpresent.io/about](https://digitalpresent.io/about)
 - [https://www.couleecreative.com/](https://www.couleecreative.com/)
 - [https://two.zero.nyc/](https://two.zero.nyc/)
+- [https://www.danilodemarco.com/](https://www.danilodemarco.com/)
+- [https://lsce.com/](https://lsce.com/)
+- [http://vadimtyurin.com/](http://vadimtyurin.com/)
