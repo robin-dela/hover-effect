@@ -21,7 +21,7 @@
     "dist"
   ],
   "dependencies": {
-    "gsap": "^2.0.2",
+    "gsap": "2.0.2",
     "three": "^0.99.0"
   }
 }
