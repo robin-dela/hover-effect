@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import TweenMax from 'gsap/TweenMax';
+import TweenMax from 'gsap';
 
 export default function (opts) {
 
