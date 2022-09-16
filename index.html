@@ -65,6 +65,8 @@
 	<div class="balloon-ctr">
 		<div class='div5 demo'></div>
 		<button class="previous control">PREVIOUS</span>
+			<button class="play control">PLAY</span>
+			<button class="stop control">STOP</span>
 		<button class="next control">NEXT</span>
 	</div>
 
@@ -132,12 +134,13 @@
 			parent: document.querySelector('.div5'),
 			intensity: 0.2,
 			imagesRatio: 512 / 768,
-			image1: 'images/balloon.jpg',
-			image2: 'images/balloon2.jpg',
+			images:['images/balloon.jpg','images/balloon2.jpg','images/ice.jpg','images/ice2.jpg'],
 			displacementImage: 'images/dot.jpg',
 			hover: false
 		});
 		document.querySelector('.next').addEventListener('click', button5.next);
+		document.querySelector('.play').addEventListener('click', button5.playSlideshow);
+		document.querySelector('.stop').addEventListener('click', button5.stopSlideshow);
 		document.querySelector('.previous').addEventListener('click', button5.previous);
 
 		var button6 = new hoverEffect({
