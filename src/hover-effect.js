@@ -63,6 +63,7 @@ void main() {
   var dispImage = opts.displacementImage;
   var image1 = opts.image1;
   var image2 = opts.image2;
+  var images =  firstDefined(opts.images,[opts.image1,opts.image2]);
   var imagesRatio = firstDefined(opts.imagesRatio, 1.0);
   var intensity1 = firstDefined(opts.intensity1, opts.intensity, 1);
   var intensity2 = firstDefined(opts.intensity2, opts.intensity, 1);
@@ -74,55 +75,171 @@ void main() {
   var userHover = firstDefined(opts.hover, true);
   var easing = firstDefined(opts.easing, Expo.easeOut);
   var video = firstDefined(opts.video, false);
+  var transitionDelay = firstDefined(opts.transitionDelay, 3000);
+
+  var currentImage = 0;
+  var nextImage = 1;
+  var mat = undefined;
+  var object = undefined;
+  var geometry = undefined;
+  var texture1 = null;
+  var texture2 = null;
+  var disp = null;
+  var loader = null;
+  var slideshowId = null;
 
   if (!parent) {
     console.warn('Parent missing');
     return;
   }
 
-  if (!(image1 && image2 && dispImage)) {
+  if (!((images || (image1 && image2)) && dispImage)) {
     console.warn('One or more images are missing');
     return;
   }
 
   var scene = new THREE.Scene();
   var camera = new THREE.OrthographicCamera(
-    parent.offsetWidth / -2,
-    parent.offsetWidth / 2,
-    parent.offsetHeight / 2,
-    parent.offsetHeight / -2,
-    1,
-    1000
+      parent.offsetWidth / -2,
+      parent.offsetWidth / 2,
+      parent.offsetHeight / 2,
+      parent.offsetHeight / -2,
+      1,
+      1000
   );
-
-  camera.position.z = 1;
 
   var renderer = new THREE.WebGLRenderer({
     antialias: false,
     alpha: true
   });
 
-  renderer.setPixelRatio(2.0);
-  renderer.setClearColor(0xffffff, 0.0);
-  renderer.setSize(parent.offsetWidth, parent.offsetHeight);
-  parent.appendChild(renderer.domElement);
+  var imageAspect = imagesRatio;
 
   var render = function () {
     // This will be called by the TextureLoader as well as TweenMax.
     renderer.render(scene, camera);
   };
 
-  var loader = new THREE.TextureLoader();
-  loader.crossOrigin = '';
+  function setLoader() {
+    loader = new THREE.TextureLoader();
+    loader.crossOrigin = '';
+  }
 
-  var disp = loader.load(dispImage, render);
-  disp.magFilter = disp.minFilter = THREE.LinearFilter;
+  function setDisplacement() {
+    disp = loader.load(dispImage, render);
+    disp.magFilter = disp.minFilter = THREE.LinearFilter;
+  }
 
-  if (video) {
+  function setMaterial() {
+    mat = new THREE.ShaderMaterial({
+      uniforms: {
+        intensity1: {
+          type: 'f',
+          value: intensity1
+        },
+        intensity2: {
+          type: 'f',
+          value: intensity2
+        },
+        dispFactor: {
+          type: 'f',
+          value: 0.0
+        },
+        angle1: {
+          type: 'f',
+          value: angle1
+        },
+        angle2: {
+          type: 'f',
+          value: angle2
+        },
+        texture1: {
+          type: 't',
+          value: texture1
+        },
+        texture2: {
+          type: 't',
+          value: texture2
+        },
+        disp: {
+          type: 't',
+          value: disp
+        },
+        res: {
+          type: 'vec4',
+          value: new THREE.Vector4(parent.offsetWidth, parent.offsetHeight, a1, a2)
+        },
+        dpr: {
+          type: 'f',
+          value: window.devicePixelRatio
+        }
+      },
+
+      vertexShader: vertex,
+      fragmentShader: fragment,
+      transparent: true,
+      opacity: 1.0,
+    });
+  }
+
+  function setMaterialForNextTransition() {
+    mat.uniforms.texture1.value = texture1;
+    mat.uniforms.texture2.value = texture2;
+    mat.uniforms.dispFactor.value = 0;
+  }
+
+  function setScene() {
+    scene = new THREE.Scene();
+    geometry = new THREE.PlaneBufferGeometry(parent.offsetWidth, parent.offsetHeight, 1);
+    object = new THREE.Mesh(geometry, mat);
+    scene.add(object);
+  }
+
+  function transitionIn() {
+    TweenMax.to(mat.uniforms.dispFactor, speedIn, {
+      value: 1,
+      ease: easing,
+      onUpdate: render,
+      onComplete: render,
+    });
+  }
+
+  function transitionOut() {
+    TweenMax.to(mat.uniforms.dispFactor, speedOut, {
+      value: 0,
+      ease: easing,
+      onUpdate: render,
+      onComplete: render
+    });
+  }
+
+  function playSlideshow() {
+    var index = 0
+    setImage(index)
+    slideshowId = setInterval(() => {
+      transitionIn()
+      index = nextImage
+      setImage(index)
+      loadTexturesImages()
+      setMaterialForNextTransition()
+    }, transitionDelay);
+    return slideshowId;
+  }
+
+  function stopSlideshow() {
+    slideshowId && clearInterval(slideshowId);
+  }
+
+  function setImage(index) {
+    currentImage = index
+    nextImage = (index == (images.length - 1)) ? 0 : (index + 1)
+  }
+
+  function loadTexturesVideos() {
     var animate = function() {
-        requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
 
-        renderer.render(scene, camera);
+      renderer.render(scene, camera);
     };
     animate();
 
@@ -164,16 +281,24 @@ void main() {
 
       mat.uniforms.texture1.value = texture1;
     }, false);
-  } else {
-    var texture1 = loader.load(image1, render);
-    var texture2 = loader.load(image2, render);
+  }
+
+  function loadTexturesImages() {
+    texture1 = texture2 || loader.load(images[currentImage], render);
+    texture2 = loader.load(images[nextImage], render);
 
     texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
     texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
   }
 
+  camera.position.z = 1;
+
+  renderer.setPixelRatio(2.0);
+  renderer.setClearColor(0xffffff, 0.0);
+  renderer.setSize(parent.offsetWidth, parent.offsetHeight);
+  parent.appendChild(renderer.domElement);
+
   let a1, a2;
-  var imageAspect = imagesRatio;
   if (parent.offsetHeight / parent.offsetWidth < imageAspect) {
     a1 = 1;
     a2 = parent.offsetHeight / parent.offsetWidth / imageAspect;
@@ -182,77 +307,15 @@ void main() {
     a2 = 1;
   }
 
-  var mat = new THREE.ShaderMaterial({
-    uniforms: {
-      intensity1: {
-        type: 'f',
-        value: intensity1
-      },
-      intensity2: {
-        type: 'f',
-        value: intensity2
-      },
-      dispFactor: {
-        type: 'f',
-        value: 0.0
-      },
-      angle1: {
-        type: 'f',
-        value: angle1
-      },
-      angle2: {
-        type: 'f',
-        value: angle2
-      },
-      texture1: {
-        type: 't',
-        value: texture1
-      },
-      texture2: {
-        type: 't',
-        value: texture2
-      },
-      disp: {
-        type: 't',
-        value: disp
-      },
-      res: {
-        type: 'vec4',
-        value: new THREE.Vector4(parent.offsetWidth, parent.offsetHeight, a1, a2)
-      },
-      dpr: {
-        type: 'f',
-        value: window.devicePixelRatio
-      }
-    },
+  setLoader()
 
-    vertexShader: vertex,
-    fragmentShader: fragment,
-    transparent: true,
-    opacity: 1.0,
-  });
+  setDisplacement()
 
-  var geometry = new THREE.PlaneBufferGeometry(parent.offsetWidth, parent.offsetHeight, 1);
-  var object = new THREE.Mesh(geometry, mat);
-  scene.add(object);
+  video ? loadTexturesVideos() : loadTexturesImages();
 
-  function transitionIn() {
-    TweenMax.to(mat.uniforms.dispFactor, speedIn, {
-      value: 1,
-      ease: easing,
-      onUpdate: render,
-      onComplete: render,
-    });
-  }
+  setMaterial();
 
-  function transitionOut() {
-    TweenMax.to(mat.uniforms.dispFactor, speedOut, {
-      value: 0,
-      ease: easing,
-      onUpdate: render,
-      onComplete: render,
-    });
-  }
+  setScene()
 
   if (userHover) {
     parent.addEventListener('mouseenter', transitionIn);
@@ -276,5 +339,8 @@ void main() {
   });
 
   this.next = transitionIn;
+  this.playSlideshow = playSlideshow;
+  this.stopSlideshow = stopSlideshow;
   this.previous = transitionOut;
 };
+
