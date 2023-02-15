@@ -10,8 +10,8 @@ Javascript library to draw and animate images on hover.
 
 ## Example
 <p align="center">
-    <img alt="example 1" src="gifs/1.gif" width="256">
-    <img alt="example 2" src="gifs/2.gif" width="256">
+    <img alt="example 1" src="https://github.com/robin-dela/hover-effect/blob/master/gifs/1.gif?raw=true" width="256">
+    <img alt="example 2" src="https://github.com/robin-dela/hover-effect/blob/master/gifs/2.gif?raw=true" width="256">
 </p>
 
 ## Use locally
@@ -106,7 +106,7 @@ Thanks to :
 
 ## Made with it
 <p align="center">
-    <img alt="Alex Brown demo" src="gifs/alex_brown.gif" width="512">
+    <img alt="Alex Brown demo" src="https://github.com/robin-dela/hover-effect/blob/master/gifs/alex_brown.gif?raw=true" width="512">
 </p>
 
 - [Codepen demo](https://codepen.io/alxrbrown/pen/GxVQLr) and [Medium article](https://medium.com/@alxrbrown/create-a-distortion-hover-effect-using-webgl-32fc1ab50d24) by Alex Brown
