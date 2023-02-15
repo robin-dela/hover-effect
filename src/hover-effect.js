@@ -1,8 +1,7 @@
-import * as THREE from 'three';
-import TweenMax from 'gsap/TweenMax';
+import * as THREE from "three";
+import gsap from "gsap";
 
-export default function (opts) {
-
+export default function(opts) {
   var vertex = `
 varying vec2 vUv;
 void main() {
@@ -50,8 +49,10 @@ void main() {
 `;
 
   // please respect authorship and do not remove
-  console.log('%c Hover effect by Robin Delaporte: https://github.com/robin-dela/hover-effect ', 'color: #bada55; font-size: 0.8rem');
-
+  console.log(
+    "%c Hover effect by Robin Delaporte: https://github.com/robin-dela/hover-effect ",
+    "color: #bada55; font-size: 0.8rem"
+  );
 
   function firstDefined() {
     for (var i = 0; i < arguments.length; i++) {
@@ -72,16 +73,16 @@ void main() {
   var speedIn = firstDefined(opts.speedIn, opts.speed, 1.6);
   var speedOut = firstDefined(opts.speedOut, opts.speed, 1.2);
   var userHover = firstDefined(opts.hover, true);
-  var easing = firstDefined(opts.easing, Expo.easeOut);
+  var easing = firstDefined(opts.easing, "expo.out");
   var video = firstDefined(opts.video, false);
 
   if (!parent) {
-    console.warn('Parent missing');
+    console.warn("Parent missing");
     return;
   }
 
   if (!(image1 && image2 && dispImage)) {
-    console.warn('One or more images are missing');
+    console.warn("One or more images are missing");
     return;
   }
 
@@ -107,34 +108,36 @@ void main() {
   renderer.setSize(parent.offsetWidth, parent.offsetHeight);
   parent.appendChild(renderer.domElement);
 
-  var render = function () {
-    // This will be called by the TextureLoader as well as TweenMax.
+  var render = function() {
+    // This will be called by the TextureLoader as well as Gsap.
     renderer.render(scene, camera);
   };
 
   var loader = new THREE.TextureLoader();
-  loader.crossOrigin = '';
+  loader.crossOrigin = "";
 
   var disp = loader.load(dispImage, render);
   disp.magFilter = disp.minFilter = THREE.LinearFilter;
 
   if (video) {
     var animate = function() {
-        requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
 
-        renderer.render(scene, camera);
+      renderer.render(scene, camera);
     };
     animate();
 
-    var video = document.createElement('video');
+    var video = document.createElement("video");
     video.autoplay = true;
     video.loop = true;
+    video.muted = true;
     video.src = image1;
     video.load();
 
-    var video2 = document.createElement('video');
+    var video2 = document.createElement("video");
     video2.autoplay = true;
     video2.loop = true;
+    video2.muted = true;
     video2.src = image2;
     video2.load();
 
@@ -143,27 +146,34 @@ void main() {
     texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
     texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
 
-    video2.addEventListener('loadeddata', function() {
-      video2.play();
+    video2.addEventListener(
+      "loadeddata",
+      function() {
+        video2.play();
 
-      texture2 = new THREE.VideoTexture(video2);
-      texture2.magFilter = THREE.LinearFilter;
-      texture2.minFilter = THREE.LinearFilter;
+        texture2 = new THREE.VideoTexture(video2);
+        texture2.magFilter = THREE.LinearFilter;
+        texture2.minFilter = THREE.LinearFilter;
 
-      mat.uniforms.texture2.value = texture2;
+        mat.uniforms.texture2.value = texture2;
+      },
+      false
+    );
 
-    }, false);
+    video.addEventListener(
+      "loadeddata",
+      function() {
+        video.play();
 
-    video.addEventListener('loadeddata', function() {
-      video.play();
+        texture1 = new THREE.VideoTexture(video);
 
-      texture1 = new THREE.VideoTexture(video);
+        texture1.magFilter = THREE.LinearFilter;
+        texture1.minFilter = THREE.LinearFilter;
 
-      texture1.magFilter = THREE.LinearFilter;
-      texture1.minFilter = THREE.LinearFilter;
-
-      mat.uniforms.texture1.value = texture1;
-    }, false);
+        mat.uniforms.texture1.value = texture1;
+      },
+      false
+    );
   } else {
     var texture1 = loader.load(image1, render);
     var texture2 = loader.load(image2, render);
@@ -185,43 +195,48 @@ void main() {
   var mat = new THREE.ShaderMaterial({
     uniforms: {
       intensity1: {
-        type: 'f',
+        type: "f",
         value: intensity1
       },
       intensity2: {
-        type: 'f',
+        type: "f",
         value: intensity2
       },
       dispFactor: {
-        type: 'f',
+        type: "f",
         value: 0.0
       },
       angle1: {
-        type: 'f',
+        type: "f",
         value: angle1
       },
       angle2: {
-        type: 'f',
+        type: "f",
         value: angle2
       },
       texture1: {
-        type: 't',
+        type: "t",
         value: texture1
       },
       texture2: {
-        type: 't',
+        type: "t",
         value: texture2
       },
       disp: {
-        type: 't',
+        type: "t",
         value: disp
       },
       res: {
-        type: 'vec4',
-        value: new THREE.Vector4(parent.offsetWidth, parent.offsetHeight, a1, a2)
+        type: "vec4",
+        value: new THREE.Vector4(
+          parent.offsetWidth,
+          parent.offsetHeight,
+          a1,
+          a2
+        )
       },
       dpr: {
-        type: 'f',
+        type: "f",
         value: window.devicePixelRatio
       }
     },
@@ -229,39 +244,45 @@ void main() {
     vertexShader: vertex,
     fragmentShader: fragment,
     transparent: true,
-    opacity: 1.0,
+    opacity: 1.0
   });
 
-  var geometry = new THREE.PlaneBufferGeometry(parent.offsetWidth, parent.offsetHeight, 1);
+  var geometry = new THREE.PlaneGeometry(
+    parent.offsetWidth,
+    parent.offsetHeight,
+    1
+  );
   var object = new THREE.Mesh(geometry, mat);
   scene.add(object);
 
   function transitionIn() {
-    TweenMax.to(mat.uniforms.dispFactor, speedIn, {
+    gsap.to(mat.uniforms.dispFactor, {
+      duration: speedIn,
       value: 1,
       ease: easing,
       onUpdate: render,
-      onComplete: render,
+      onComplete: render
     });
   }
 
   function transitionOut() {
-    TweenMax.to(mat.uniforms.dispFactor, speedOut, {
+    gsap.to(mat.uniforms.dispFactor, {
+      duration: speedOut,
       value: 0,
       ease: easing,
       onUpdate: render,
-      onComplete: render,
+      onComplete: render
     });
   }
 
   if (userHover) {
-    parent.addEventListener('mouseenter', transitionIn);
-    parent.addEventListener('touchstart', transitionIn);
-    parent.addEventListener('mouseleave', transitionOut);
-    parent.addEventListener('touchend', transitionOut);
+    parent.addEventListener("mouseenter", transitionIn);
+    parent.addEventListener("touchstart", transitionIn);
+    parent.addEventListener("mouseleave", transitionOut);
+    parent.addEventListener("touchend", transitionOut);
   }
 
-  window.addEventListener('resize', function (e) {
+  window.addEventListener("resize", function(e) {
     if (parent.offsetHeight / parent.offsetWidth < imageAspect) {
       a1 = 1;
       a2 = parent.offsetHeight / parent.offsetWidth / imageAspect;
@@ -269,12 +290,17 @@ void main() {
       a1 = (parent.offsetWidth / parent.offsetHeight) * imageAspect;
       a2 = 1;
     }
-    object.material.uniforms.res.value = new THREE.Vector4(parent.offsetWidth, parent.offsetHeight, a1, a2);
+    object.material.uniforms.res.value = new THREE.Vector4(
+      parent.offsetWidth,
+      parent.offsetHeight,
+      a1,
+      a2
+    );
     renderer.setSize(parent.offsetWidth, parent.offsetHeight);
 
-    render()
+    render();
   });
 
   this.next = transitionIn;
   this.previous = transitionOut;
-};
+}

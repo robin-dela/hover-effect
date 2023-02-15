@@ -1,153 +1,150 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>title</title>
+    <style>
+      body {
+        margin: 10px;
+        background: white;
+      }
 
-<head>
-	<meta charset=utf-8>
-	<title>title</title>
-	<style>
-		body {
-			margin: 10px;
-			background: white
-		}
+      .demo {
+        width: 40vw;
+        height: 40vh;
+        margin: 10px auto;
+        position: relative;
+      }
 
-		.demo {
-			width: 40vw;
-			height: 40vh;
-			margin: 10px auto;
-			position: relative;
-		}
+      .div5 {
+        width: 50vw;
+        height: 256px;
+      }
 
-		.div5 {
-			width: 50vw;
-			height: 256px;
-		}
+      .div4 {
+        background: black;
+      }
 
-		.div4 {
-			background: black;
-		}
+      .div4 span {
+        position: absolute;
+        color: rgba(255, 255, 255, 1);
+        font-size: 14px;
+        font-family: sans-serif;
+        font-weight: bold;
+        letter-spacing: 4px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: color 0.6s ease;
+      }
 
-		.div4 span {
-			position: absolute;
-			color: rgba(255, 255, 255, 1);
-			font-size: 14px;
-			font-family: sans-serif;
-			font-weight: bold;
-			letter-spacing: 4px;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			transition: color 0.6s ease;
-		}
+      .div4:hover span {
+        transition: color 0.6s ease;
+        color: rgba(255, 255, 255, 0.6);
+      }
 
-		.div4:hover span {
-			transition: color 0.6s ease;
-			color: rgba(255, 255, 255, 0.6);
-		}
+      .balloon-ctr {
+        text-align: center;
+      }
 
-		.balloon-ctr {
-			text-align: center;
-		}
+      .demos-ctr .demo {
+        display: inline-block;
+      }
 
-		.demos-ctr .demo {
-			display: inline-block;
-		}
+      .control {
+        margin: 0px 20px;
+      }
+    </style>
+    <script src="example/js/three.min.js"></script>
+    <script src="example/js/gsap.min.js"></script>
+    <script src="dist/hover-effect.umd.js"></script>
+  </head>
+  <body>
+    <div class="balloon-ctr">
+      <div class="div5 demo"></div>
+      <button class="previous control">PREVIOUS</button>
+      <button class="next control">NEXT</button>
+    </div>
+    <div class="demos-ctr">
+      <div class="div-video demo"></div>
+      <div class="div demo"></div>
+      <div class="div2 demo"></div>
+      <div class="div3 demo"></div>
+      <div class="div4 demo">
+        <span>MY BUTTON</span>
+      </div>
+      <div class="div6 demo"></div>
+    </div>
+    <script>
+      var button = new hoverEffect({
+        parent: document.querySelector(".div-video"),
+        image1: "videos/video.mp4",
+        image2: "videos/video2.mp4",
+        displacementImage: "images/fluid.jpg",
+        video: true
+      });
 
-		.control {
-			margin: 0px 20px;
-		}
-	</style>
-	<script src="example/js/three.min.js"></script>
-	<script src="example/js/TweenMax.min.js"></script>
-	<script src="dist/hover-effect.umd.js"></script>
-</head>
+      var button = new hoverEffect({
+        parent: document.querySelector(".div"),
+        intensity1: 0.1,
+        intensity2: 0.1,
+        angle2: Math.PI / 2,
+        image1: "images/ny.jpg",
+        image2: "images/ny-info.jpg",
+        imagesRatio: 512 / 512,
+        displacementImage: "images/stripe1mul.png"
+      });
 
-<body>
-	<div class="balloon-ctr">
-		<div class='div5 demo'></div>
-		<button class="previous control">PREVIOUS</span>
-		<button class="next control">NEXT</span>
-	</div>
+      var button2 = new hoverEffect({
+        parent: document.querySelector(".div2"),
+        intensity1: 0.25,
+        intensity2: 0.25,
+        angle1: Math.PI / 2,
+        angle2: -Math.PI / 2,
+        image1: "images/ice.jpg",
+        image2: "images/ice2.jpg",
+        displacementImage: "images/ramen.jpg"
+      });
 
-	<div class="demos-ctr">
-		<div class='div-video demo'></div>
-		<div class='div demo'></div>
-		<div class='div2 demo'></div>
-		<div class='div3 demo'></div>
-		<div class='div4 demo'>
-			<span>MY BUTTON</span>
-		</div>
-		<div class='div6 demo'></div>
-	</div>
+      var button3 = new hoverEffect({
+        parent: document.querySelector(".div3"),
+        intensity: 0.3,
+        image1: "images/hover.jpg",
+        image2: "images/hover.jpg",
+        displacementImage: "images/fluid.jpg",
+        speedIn: 1.0,
+        speedOut: 1.0
+      });
 
-	<script>
-		var button = new hoverEffect({
-			parent: document.querySelector('.div-video'),
-			image1: 'videos/video.mp4',
-			image2: 'videos/video2.mp4',
-			displacementImage: 'images/fluid.jpg',
-			video: true
-		});
+      var button4 = new hoverEffect({
+        parent: document.querySelector(".div4"),
+        intensity: 0.1,
+        image1: "images/rect.png",
+        image2: "images/rect.png",
+        displacementImage: "images/strip.png"
+      });
 
-		var button = new hoverEffect({
-			parent: document.querySelector('.div'),
-			intensity1: 0.1,
-			intensity2: 0.1,
-			angle2: Math.PI / 2,
-			image1: 'images/ny.jpg',
-			image2: 'images/ny-info.jpg',
-			imagesRatio: 512 / 512,
-			displacementImage: 'images/stripe1mul.png'
-		});
+      var button5 = new hoverEffect({
+        parent: document.querySelector(".div5"),
+        intensity: 0.2,
+        imagesRatio: 512 / 768,
+        image1: "images/balloon.jpg",
+        image2: "images/balloon2.jpg",
+        displacementImage: "images/dot.jpg",
+        hover: false
+      });
+      document.querySelector(".next").addEventListener("click", button5.next);
+      document
+        .querySelector(".previous")
+        .addEventListener("click", button5.previous);
 
-		var button2 = new hoverEffect({
-			parent: document.querySelector('.div2'),
-			intensity1: 0.25,
-			intensity2: 0.25,
-			angle1: Math.PI / 2,
-			angle2: -Math.PI / 2,
-			image1: 'images/ice.jpg',
-			image2: 'images/ice2.jpg',
-			displacementImage: 'images/ramen.jpg'
-		});
-
-		var button3 = new hoverEffect({
-			parent: document.querySelector('.div3'),
-			intensity: 0.3,
-			image1: 'images/hover.jpg',
-			image2: 'images/hover.jpg',
-			displacementImage: 'images/fluid.jpg',
-			speedIn: 1.0,
-			speedOut: 1.0
-		});
-
-		var button4 = new hoverEffect({
-			parent: document.querySelector('.div4'),
-			intensity: 0.1,
-			image1: 'images/rect.png',
-			image2: 'images/rect.png',
-			displacementImage: 'images/strip.png'
-		});
-
-		var button5 = new hoverEffect({
-			parent: document.querySelector('.div5'),
-			intensity: 0.2,
-			imagesRatio: 512 / 768,
-			image1: 'images/balloon.jpg',
-			image2: 'images/balloon2.jpg',
-			displacementImage: 'images/dot.jpg',
-			hover: false
-		});
-		document.querySelector('.next').addEventListener('click', button5.next);
-		document.querySelector('.previous').addEventListener('click', button5.previous);
-
-		var button6 = new hoverEffect({
-			parent: document.querySelector('.div6'),
-			intensity: 0.2,
-			image1: 'images/submit.png',
-			image2: 'images/submit.png',
-			displacementImage: 'images/heightMap.png'
-		});
-	</script>
-</body>
-
+      var button6 = new hoverEffect({
+        parent: document.querySelector(".div6"),
+        intensity: 0.2,
+        image1: "images/submit.png",
+        image2: "images/submit.png",
+        displacementImage: "images/heightMap.png"
+      });
+    </script>
+  </body>
 </html>
