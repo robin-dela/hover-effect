@@ -2,8 +2,6 @@
 
 Javascript library to draw and animate images on hover.
 
-If this project help you, you like this library or you just want to thank me, you can give me a cup of coffee or a beer 🍺
-
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ZGDNS5D28SFWQ)
 
 [**DEMO**](https://tympanus.net/Development/DistortionHoverEffect/)
@@ -21,7 +19,7 @@ To load the images you'll need to view the demo via a web server, simply go to t
 
 ## Basic usage
 
-This helper needs [Three.js](https://threejs.org) and [TweenMax](https://greensock.com/) to do the transition, so you need to include it before this little helper.
+This helper needs [Three.js](https://threejs.org) and [gsap](https://greensock.com/) to do the transition, so you need to include it before this little helper.
 
 Then you only need a `div` element in HTML to start animating things with a piece of code like this:
 
@@ -31,7 +29,7 @@ Then you only need a `div` element in HTML to start animating things with a piec
 
 <!-- library needed -->
 <script src="three.min.js"></script>
-<script src="TweenMax.min.js"></script>
+<script src="gsap.min.js"></script>
 
 <script src="dist/hover.umd.js"></script>
 <script>
