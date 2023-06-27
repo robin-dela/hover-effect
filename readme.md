@@ -112,7 +112,6 @@ Thanks to :
 - [Codepen demo](https://codepen.io/alxrbrown/pen/GxVQLr) and [Medium article](https://medium.com/@alxrbrown/create-a-distortion-hover-effect-using-webgl-32fc1ab50d24) by Alex Brown
 - [https://stimmt.digital/en/](https://stimmt.digital/en/)
 - [https://www.fabiofantolino.com/en](https://www.fabiofantolino.com/en)
-- [https://www.rodolfosarno.com/](https://www.rodolfosarno.com/)
 - [Youtube tutorial](https://www.youtube.com/watch?v=o0zlX1E7l0A)
 - [https://www.youtube.com/watch?v=9kcOQdJHyIo](https://www.youtube.com/watch?v=9kcOQdJHyIo)
 - [https://www.estudionk.com/en](https://www.estudionk.com/en)
